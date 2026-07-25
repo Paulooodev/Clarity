@@ -9,7 +9,7 @@ export default function Hero() {
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
-      className="card ledger max-w-lg p-6 py-16"
+      className="ledger max-w-lg p-6 py-16"
     >
       <h1 className="text-3xl">
         Think first. Review honestly.
