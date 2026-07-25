@@ -15,9 +15,12 @@ export default function AuthCallback() {
                 if(data.session) {
                     // if login is successful
                     // Check for ?next in the parameter
-                    const next = new URLSearchParams(window.location.search).get('next');
+                    const params = new URLSearchParams(window.location.search);
+                    const next = params.get('next');
+
+                    const justVerified = params.get('type') === 'signup';
                     // if it exists, go there or go home('/')
-                    router.replace(next ?? '/')
+                    router.replace(justVerified ? '/?verified=1' : (next ?? '/'))
                     // forces server components to re-fetch data with the new session.
                     router.refresh();
                 } else {

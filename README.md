@@ -13,7 +13,7 @@ Clarity helps you log important decisions, reflect on your reasoning, track outc
 - **Domain Breakdown** – See where your process is strongest
 - **Private & Secure** – Built with Supabase + Row Level Security (RLS)
 
-## Tech Stack
+## 👨‍🔧 Tech Stack
 
 - **Frontend**: Next.js (App Router) + Tailwind CSS
 - **Backend / Database**: Supabase (PostgreSQL + Auth + RLS)

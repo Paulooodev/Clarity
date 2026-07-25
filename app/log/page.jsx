@@ -9,12 +9,13 @@ import { createClient } from "@/lib/supabase/client";
 // If I add one here, I must also alter the constraint in Postgres or the
 // insert will be rejected. These two places needs to be in sync.
 const DOMAINS = [
-    { id: 'trade', label: 'Trade' },
-    { id: 'sport', label: 'Sport' },
-    { id: 'life', label: 'Life' },
+  { id: 'trade', label: 'Trade' },
+  { id: 'career', label: 'Career' },
+  { id: 'sport', label: 'Sport' },
+  { id: 'life', label: 'Life' },
 ];
 
-// ─── The four prompts ────────────────────────────────────────────────────────
+// ─── The four prompts 
 // Order matters. Decision → why → invalidation → feeling walks users from the
 // easy part to the uncomfortable part. 
 const PROMPTS = [

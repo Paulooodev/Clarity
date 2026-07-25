@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { createServerSupabase } from 'lib/supabase/server';
 
 
-const DOMAIN_LABEL = { trade: 'Trade', sport: 'Sport', life: 'Life' };
+const DOMAIN_LABEL = { trade: 'Trade', career: 'Career', sport: 'Sport', life: 'Life' };
 
 export default async function Today({ searchParams }) {
   const params = await searchParams;
