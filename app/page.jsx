@@ -1,7 +1,7 @@
 // app/page.jsx
 import Link from 'next/link';
 import { createServerSupabase } from 'lib/supabase/server';
-
+import Hero from './components/Hero';
 
 const DOMAIN_LABEL = { trade: 'Trade', career: 'Career', sport: 'Sport', life: 'Life' };
 
@@ -185,23 +185,6 @@ function Matrix({ reviewed }) {
 // Shown to logged-out visitors. Your stand-in landing page until you build a
 // real one — better than bouncing strangers straight to a login wall.
 function SignedOut() {
-  return (
-    <div className="max-w-lg py-16">
-      <h1 className="text-3xl">
-        Think first. Review honestly.
-      </h1>
-      <p className="mt-3 text-[17px] text-muted">
-        Clarity separates two things people constantly confuse: whether your reasoning
-        was sound, and whether it worked out. Log a decision before you act. Judge the
-        thinking afterwards, on its own terms.
-      </p>
-      <Link
-        href="/login"
-        className='mt-6 inline-block rounded-lg bg-ink px-5 py-2.5 text-[15px] font-medium text-paper transition-colors hover:bg-indigo'
-        >
-          Get Started
-        </Link>
-    </div>
-  );
+  return <Hero />;
 }
 
