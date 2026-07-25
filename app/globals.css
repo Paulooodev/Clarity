@@ -1,15 +1,56 @@
+
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #edeef0;
+  --card: #fafafa;
+  --rule: #dedfe3;
+
+    /* Text */
+  --ink: #1b1f24;
+  --muted: #6a7280;
+  --faint: #9aa1ac;
+
+  --indigo: #383a73;
+  --indigo-wash: #e7e7f1;
+
+  --verdict-sound: #383a73;  /* indigo */
+  --verdict-mixed: #7c8391;  /* slate  */
+  --verdict-flawed: #7a4b62; /* plum   */
+
+  --brass: #b08243;
+
+  /* font */
+  --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-lexend), ui-sans-serif, system-ui, sans-serif;
+  --font-data: "JetBrains Mono", ui-monospace, monospace;
 }
 
+
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+ --color-paper: var(--paper);
+  --color-card: var(--card);
+  --color-rule: var(--rule);
+
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+
+  --color-indigo: var(--indigo);
+  --color-indigo-wash: var(--indigo-wash);
+
+  --color-verdict-sound: var(--verdict-sound);
+  --color-verdict-mixed: var(--verdict-mixed);
+  --color-verdict-flawed: var(--verdict-flawed);
+
+  --color-brass: var(--brass);
+
+   --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-data: var(--font-data);
+
+  --radius-lg: 10px;
+  --radius-xl: 14px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,7 +61,48 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.01rem;
+}
+
+:focus-visible {
+  outline:none;
+  box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--indigo);
+  border-radius: 4px;
+}
+
+.ledger {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 31px,
+    color-mix(in srgb, var(--ink) 6%, transparent) 31px,
+    color-mix(in srgb, var(--ink) 6%, transparent) 32px,
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@utility card {
+  @apply rounded-xl border border-rule bg-card;
+}
+@utility field {
+  @apply mt-1.5 w-full resize-none rounded-lg border border-rule bg-paper/60 px-3 py-2
+         text-[15px] placeholder:text-faint focus:border-indigo focus:outline-none;
+}
+@utility eyebrow {
+  @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-faint;
 }
