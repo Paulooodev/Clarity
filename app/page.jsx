@@ -5,7 +5,9 @@ import { createServerSupabase } from 'lib/supabase/server';
 
 const DOMAIN_LABEL = { trade: 'Trade', sport: 'Sport', life: 'Life' };
 
-export default async function Today() {
+export default async function Today({ searchParams }) {
+  const params = await searchParams;
+  const justVerified = params?.verified === '1'
   // Server components can be async. 
   // Next waits for this before rendering.
 
@@ -39,6 +41,12 @@ export default async function Today() {
 
   return (
     <div className="max-w-3xl">
+      <div>
+        {justVerified && (
+          <div className="mb-6 rounded-lg border border-indigo/30 bg-indigo-wash px-4 py-3 text-[15px] text-indigo">
+             Email verified — you&apos;re all set.
+          </div>
+        )}
       <header className="mb-10">
         <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-faint">
           {new Date().toLocaleString(undefined, {
@@ -102,6 +110,7 @@ export default async function Today() {
           </ul>
         )}
       </section>
+    </div>
     </div>
   );
 }
