@@ -15,10 +15,15 @@ export default function AuthCallback() {
                 if(data.session) {
                     // if login is successful
                     // Check for ?next in the parameter
-                    const params = new URLSearchParams(window.location.search);
-                    const next = params.get('next');
+                    const hash = new URLSearchParams(window.location.hash.slice(1));
+                    const query = new URLSearchParams(window.location.search);
 
-                    const justVerified = params.get('type') === 'signup';
+                    // type can arrive in the query OR the hash depending on the flow — check both.
+                    const type = query.get('type') ?? hash.get('type');
+                    const justVerified = type === 'signup';
+
+                    // next only ever comes from the query string.
+                    const next = query.get('next');
                     // if it exists, go there or go home('/')
                     router.replace(justVerified ? '/?verified=1' : (next ?? '/'))
                     // forces server components to re-fetch data with the new session.

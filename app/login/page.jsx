@@ -29,6 +29,7 @@ function GoogleIcon() {
 }
 
 function LoginForm() {
+    // console.log(process.env.NEXT_PUBLIC_SUPABASE_URL)
     const router = useRouter();
     const params = useSearchParams();
     const supabase = createClient();
@@ -37,7 +38,6 @@ function LoginForm() {
     // fails (expired, already used, or opened in a different browser).
     // Without this, the user gets bounced back to a blank form with no idea why.
     const callbackFailed = params.get('error') === 'auth';
-
 
     const [mode, setMode] = useState('signin');
     const [email, setEmail] = useState('');
@@ -57,9 +57,12 @@ function LoginForm() {
                 options: { emailRedirectTo: `${location.origin}/auth/callback` }
             });
             setPending(false);
-            if (error) return setError(error.message);
-            setSent(true);
-            return;
+            if (error) {
+                console.error(error);
+                setError(error.message);
+                return;
+                }
+                setSent(true);
         }
 
         const { error } = await supabase.auth.signInWithPassword({ email, password });
@@ -87,6 +90,19 @@ function LoginForm() {
             }
         })
         if(error) setError(error.message);
+    }
+
+    async function sendReset() {
+        if(!email) return setError('Enter your email first, then click reset.');
+        setError(null);
+
+        // Sends a reset email. redirectTo is where the link lands
+        //  a page where they type the new password. Must be in Supabase's allowlist.
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+            redirectTo: `${location.origin}/reset-password`,
+        });
+        if(error) return setError(error.message);
+        setSent(true); 
     }
 
     if(sent) {
@@ -141,6 +157,15 @@ function LoginForm() {
                     onKeyDown={(e) => e.key === 'Enter' && submit()}
                     className="w-full mt-1.5 rounded-lg border border-rule bg-paper/60 px-3 py-2.5 text-[15px] focus:border-indigo focus:outline-none" 
                 /> 
+                {mode === 'signin' && (
+                    <button
+                        type="button"
+                        onClick={sendReset}
+                        className="mt-1 text-[13px] text-muted underline underline-offset-4 hover:text-ink"
+                    >
+                        Forgot Password?
+                    </button>
+                )}
                     {mode === 'signup' && (
                         <span className="mt-1 block text-[13px] text-faint">At least 8 characters.</span>
                     )} 
