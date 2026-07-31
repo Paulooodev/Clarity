@@ -5,9 +5,10 @@ const MIN_FOR_RATE = 5;
 
 const FEELINGS = ['Calm', 'Confident', 'Rushed', 'Anxious', 'Bored', 'Tilted'];
 const DOMAINS = [
-    { id: 'trade', label: 'Trade' },
-    { id: 'sport', label: 'Sport' },
-    { id: 'life', label: 'Life' },
+  { id: 'trade', label: 'Trade' },
+  { id: 'career', label: 'Career' },
+  { id: 'sport', label: 'Sport' },
+  { id: 'life', label: 'Life' },
 ]
 
 export default async function Patterns() {
@@ -69,9 +70,9 @@ export default async function Patterns() {
                        <Breakdown 
                            title="Reasoning by domain"
                            blurb="Where your process is strongest — and where you're operating on feel."
-                           rows={FEELINGS.map((d) => ({
+                           rows={DOMAINS.map((d) => ({
                             label: d.label,
-                            entries: reviewed.filter((e) => e.feeling === d.id),
+                            entries: reviewed.filter((e) => e.domain === d.id),
                            }))} 
                        /> 
                     </div>
